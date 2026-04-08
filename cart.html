@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FlavourRush — Cart</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.cart-wrap{display:grid;grid-template-columns:1fr 390px;gap:32px;padding:44px clamp(16px,4vw,80px);max-width:1240px;margin:0 auto;}
+@media(max-width:900px){.cart-wrap{grid-template-columns:1fr;}}
+.cart-item{display:flex;align-items:center;gap:16px;background:var(--card-bg);border:1px solid var(--border);border-radius:18px;padding:16px 20px;margin-bottom:12px;transition:all .22s;animation:si .35s cubic-bezier(.22,1,.36,1) both;}
+@keyframes si{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
+.cart-item:hover{border-color:rgba(255,90,31,0.2);}
+.ci-img{width:68px;height:68px;border-radius:12px;overflow:hidden;background:var(--input-bg);flex-shrink:0;}
+.ci-img img{width:100%;height:100%;object-fit:cover;}
+.ci-info{flex:1;min-width:0;}
+.ci-name{font-family:'Playfair Display',serif;font-size:1.02rem;font-weight:700;color:var(--text);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ci-price{font-size:.85rem;color:var(--text-muted);}
+.qty{display:flex;align-items:center;gap:2px;background:var(--input-bg);border-radius:50px;padding:3px;border:1px solid var(--border);}
+.qty-btn{width:32px;height:32px;border-radius:50%;border:none;background:transparent;color:var(--text);font-size:1.15rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;line-height:1;}
+.qty-btn:hover{background:var(--accent);color:#fff;}
+.qty-num{min-width:32px;text-align:center;font-weight:600;font-size:.92rem;color:var(--text);}
+.ci-sub{font-family:'Playfair Display',serif;font-size:1.08rem;font-weight:700;color:var(--accent);min-width:60px;text-align:right;}
+.rm-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;font-size:.95rem;}
+.rm-btn:hover{background:#ef4444;border-color:#ef4444;color:#fff;}
+/* SUMMARY */
+.summary{background:var(--card-bg);border:1px solid var(--border);border-radius:22px;padding:28px 26px;position:sticky;top:86px;height:fit-content;}
+.summary h2{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.sum-row{display:flex;justify-content:space-between;font-size:.9rem;color:var(--text-muted);margin-bottom:11px;}
+.sum-row .v{font-weight:600;color:var(--text);}
+.sum-total{font-size:1.1rem;font-weight:700;color:var(--text);border-top:1px solid var(--border);padding-top:13px;margin-top:4px;}
+.sum-total .v{color:var(--accent);font-family:'Playfair Display',serif;}
+.promo-row{display:flex;gap:8px;margin:18px 0;}
+.promo-row input{flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;background:var(--input-bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:.86rem;outline:none;}
+.promo-row input:focus{border-color:var(--accent);}
+.promo-row button{padding:10px 16px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.86rem;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.promo-row button:hover{background:var(--accent2);}
+.checkout-btn{width:100%;padding:16px;background:linear-gradient(135deg,#ff5a1f,#e8390e);color:#fff;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all .22s;box-shadow:0 6px 24px rgba(255,90,31,0.35);margin-top:6px;}
+.checkout-btn:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(255,90,31,0.5);}
+/* EMPTY */
+.empty{text-align:center;padding:80px 20px;grid-column:1/-1;}
+.empty-ico{font-size:5rem;margin-bottom:20px;}
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-bg.on{opacity:1;pointer-events:all;}
+.modal{background:var(--card-bg);border:1px solid var(--border);border-radius:26px;padding:50px 44px;text-align:center;max-width:420px;width:100%;transform:scale(.9);transition:transform .3s;}
+.modal-bg.on .modal{transform:scale(1);}
+.modal-ico{font-size:5rem;margin-bottom:18px;animation:pop .6s ease;}
+@keyframes pop{0%,100%{transform:scale(1)}40%{transform:scale(1.22)}70%{transform:scale(.95)}}
+.modal h2{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--text);margin-bottom:10px;}
+.modal p{color:var(--text-muted);font-size:.94rem;line-height:1.65;margin-bottom:26px;}
+.delivery-est{background:var(--input-bg);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;}
+.de-t{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--accent);}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="home.html" class="nav-logo">🔥 FlavourRush</a>
+  <ul class="nav-links">
+    <li><a href="home.html">Home</a></li>
+    <li><a href="menu.html">Menu</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="cart.html" class="cart-btn">🛒 Cart <span class="cart-count">0</span></a>
+  </div>
+</nav>
+
+<div style="padding:30px clamp(16px,4vw,80px) 0;max-width:1240px;margin:0 auto">
+  <h1 style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700">Your Cart 🛒</h1>
+</div>
+
+<div class="cart-wrap" id="cart-wrap"></div>
+
+<div class="modal-bg" id="order-modal">
+  <div class="modal">
+    <div class="modal-ico">🎉</div>
+    <h2>Order Placed!</h2>
+    <p>Your food is being lovingly prepared. Our delivery partner will be at your door soon!</p>
+    <div class="delivery-est">
+      <div><div style="font-size:.8rem;color:var(--text-muted);margin-bottom:4px">Estimated Delivery</div><div class="de-t">28 min</div></div>
+      <div style="font-size:2.5rem">🛵</div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="goHome()">Back to Home</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+var promoOn=false;
+
+function renderCart(){
+  var cart=getCart(), wrap=document.getElementById('cart-wrap');
+  if(!cart.length){
+    wrap.innerHTML='<div class="empty"><div class="empty-ico">🛒</div><h2 style="font-family:\'Playfair Display\',serif;font-size:1.7rem;color:var(--text);margin-bottom:10px">Your cart is empty</h2><p style="color:var(--text-muted);margin-bottom:28px">Browse our menu and add some delicious items!</p><a href="menu.html" class="btn btn-primary">🍽️ Browse Menu</a></div>';
+    return;
+  }
+  var sub=getCartTotal(), del=40, disc=promoOn?Math.round(sub*.3):0, total=sub+del-disc;
+  var items=cart.map(function(it,i){
+    return '<div class="cart-item" style="animation-delay:'+i*.06+'s">'
+      +'<div class="ci-img"><img src="'+it.img+'" alt="'+it.name+'"></div>'
+      +'<div class="ci-info"><div class="ci-name">'+it.name+'</div><div class="ci-price">₹'+it.price+' per item</div></div>'
+      +'<div class="qty"><button class="qty-btn" onclick="chgQty(\''+it.id+'\',-1)">−</button><span class="qty-num">'+it.qty+'</span><button class="qty-btn" onclick="chgQty(\''+it.id+'\',1)">+</button></div>'
+      +'<div class="ci-sub">₹'+(it.price*it.qty)+'</div>'
+      +'<button class="rm-btn" onclick="delItem(\''+it.id+'\')">✕</button>'
+      +'</div>';
+  }).join('');
+  var disc_row=promoOn?'<div class="sum-row" style="color:#22c55e"><span>Promo (RUSH30 −30%)</span><span style="color:#22c55e;font-weight:600">−₹'+disc+'</span></div>':'';
+  wrap.innerHTML='<div>'
+    +'<h2 style="font-family:\'Playfair Display\',serif;font-size:1.5rem;font-weight:700;margin-bottom:20px">'+cart.length+' Item'+(cart.length>1?'s':'')+' in Cart</h2>'
+    +items
+    +'<a href="menu.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:.88rem;font-weight:600;text-decoration:none;margin-top:14px">＋ Add more items</a>'
+    +'</div>'
+    +'<div><div class="summary"><h2>Order Summary</h2>'
+    +'<div class="sum-row"><span>Subtotal ('+getCartCount()+' items)</span><span class="v">₹'+sub+'</span></div>'
+    +'<div class="sum-row"><span>Delivery Fee</span><span class="v">₹'+del+'</span></div>'
+    +disc_row
+    +'<div class="sum-row sum-total"><span>Total</span><span class="v">₹'+total+'</span></div>'
+    +'<div class="promo-row"><input id="promo-in" type="text" placeholder="Promo code (RUSH30)" '+(promoOn?'disabled value="RUSH30"':'')+'>'
+    +'<button onclick="applyPromo()">'+(promoOn?'✓ Applied':'Apply')+'</button></div>'
+    +'<button class="checkout-btn" onclick="placeOrder()">🛵 Place Order — ₹'+total+'</button>'
+    +'<p style="text-align:center;color:var(--text-dim);font-size:.76rem;margin-top:12px">🔒 Secure Payment · Fast Delivery</p>'
+    +'</div></div>';
+}
+function chgQty(id,d){updateQty(id,d);renderCart();}
+function delItem(id){removeFromCart(id);renderCart();}
+function applyPromo(){
+  var v=(document.getElementById('promo-in')||{}).value||'';
+  if(v.trim().toUpperCase()==='RUSH30'){promoOn=true;showToast('🎉 30% off applied!');renderCart();}
+  else showToast('❌ Invalid code');
+}
+function placeOrder(){document.getElementById('order-modal').classList.add('on');}
+function goHome(){localStorage.removeItem('fr-cart');location.href='home.html';}
+renderCart();
+</script>
+</body>
+</html>

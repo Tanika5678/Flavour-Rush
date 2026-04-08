@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FlavourRush — Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* HERO */
+.hero { min-height:90vh; display:flex; align-items:center; position:relative; overflow:hidden; padding:80px clamp(16px,6vw,100px); }
+.hero-bg { position:absolute;inset:0; background:radial-gradient(ellipse at 60% 50%,rgba(255,90,31,0.13) 0%,transparent 55%), radial-gradient(ellipse at 10% 80%,rgba(243,156,18,0.06) 0%,transparent 45%); }
+.hero-dots { position:absolute;right:5%;top:15%;width:240px;height:240px;background:radial-gradient(circle,rgba(255,90,31,0.06) 0%,transparent 70%);border-radius:50%; }
+.hero-content { position:relative;z-index:2;max-width:580px; }
+.hero-tag { display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:var(--accent-soft);border:1px solid rgba(255,90,31,0.25);border-radius:50px;font-size:0.78rem;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:22px; }
+.hero-title { font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:900;line-height:1.05;color:var(--text);margin-bottom:18px; }
+.hero-title .hi { color:var(--accent); }
+.hero-desc { font-size:1.05rem;color:var(--text-muted);line-height:1.75;margin-bottom:34px;max-width:460px; }
+.hero-btns { display:flex;gap:14px;flex-wrap:wrap; }
+.hero-stats { display:flex;gap:36px;margin-top:52px;padding-top:32px;border-top:1px solid var(--border);flex-wrap:wrap; }
+.stat-num { font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--text); }
+.stat-label { font-size:0.8rem;color:var(--text-muted);margin-top:2px; }
+.hero-visual { position:absolute;right:clamp(20px,7vw,120px);top:50%;transform:translateY(-50%);animation:hfloat 5s ease-in-out infinite; }
+.hero-visual img { width:clamp(260px,28vw,420px);height:auto;filter:drop-shadow(0 20px 60px rgba(255,90,31,0.22)); }
+@keyframes hfloat{0%,100%{transform:translateY(-50%) rotate(-2deg)}50%{transform:translateY(calc(-50% - 18px)) rotate(2deg)}}
+
+/* CAT GRID */
+.cat-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:14px; }
+
+/* PROMO */
+.promo {
+  background:linear-gradient(135deg,#ff5a1f 0%,#c0310a 100%);
+  border-radius:24px;padding:48px 56px;display:flex;align-items:center;justify-content:space-between;
+  position:relative;overflow:hidden;
+}
+.promo::before{content:'';position:absolute;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,0.06);top:-160px;right:-120px;}
+.promo::after{content:'';position:absolute;width:250px;height:250px;border-radius:50%;background:rgba(255,255,255,0.04);bottom:-100px;left:-80px;}
+.promo-content{position:relative;z-index:1;}
+.promo-tag{font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:10px;}
+.promo-title{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:#fff;line-height:1.1;margin-bottom:6px;}
+.promo-sub{color:rgba(255,255,255,.8);margin-bottom:24px;font-size:1rem;}
+.promo-code{display:inline-block;background:rgba(255,255,255,0.15);border:1px dashed rgba(255,255,255,0.4);padding:4px 14px;border-radius:6px;font-weight:700;letter-spacing:2px;margin-bottom:24px;color:#fff;font-size:1.1rem;}
+.promo-img{position:relative;z-index:1;animation:hfloat 4s ease-in-out infinite;}
+.promo-img img{width:clamp(100px,16vw,200px);height:auto;filter:drop-shadow(0 10px 28px rgba(0,0,0,0.3));}
+
+/* SECTION DIVIDER */
+.divider-line{width:60px;height:4px;background:linear-gradient(90deg,var(--accent),transparent);border-radius:2px;margin:12px 0 32px;}
+
+@media(max-width:768px){.hero-visual{display:none}.promo{flex-direction:column;gap:24px;padding:36px 28px}.promo-img{display:none}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="home.html" class="nav-logo">🔥 FlavourRush</a>
+  <ul class="nav-links">
+    <li><a href="home.html" class="active">Home</a></li>
+    <li><a href="menu.html">Menu</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Search dishes..." oninput="liveSearch(this.value)" onfocus="openOverlay()">
+    </div>
+    <a href="cart.html" class="cart-btn">🛒 Cart <span class="cart-count">0</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-content">
+    <div class="hero-tag">⚡ 30-Min Delivery · All Day</div>
+    <h1 class="hero-title">
+      Great Food,<br><span class="hi">Delivered Fast</span><br>to Your Door
+    </h1>
+    <p class="hero-desc">From wood-fired pizzas to silky desserts — explore 50+ handcrafted dishes from the best kitchens, delivered hot in under 30 minutes.</p>
+    <div class="hero-btns">
+      <a href="menu.html" class="btn btn-primary">🍽️ Explore Menu</a>
+      <a href="menu.html?cat=pizza" class="btn btn-outline">🍕 Order Pizza</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">50+</div><div class="stat-label">Menu items</div></div>
+      <div><div class="stat-num">4.8★</div><div class="stat-label">Avg rating</div></div>
+      <div><div class="stat-num">&lt;30</div><div class="stat-label">Min delivery</div></div>
+      <div><div class="stat-num">10k+</div><div class="stat-label">Happy customers</div></div>
+    </div>
+  </div>
+  <div class="hero-visual"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCI+CiAgPGRlZnM+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9InBsYXRlIiBjeD0iNTAlIiBjeT0iNTAlIiByPSI1MCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZmOGYwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZTRjNCIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0icGl6emEiIGN4PSI1MCUiIGN5PSI0MCUiIHI9IjU1JSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmNGE0MzUiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZDQ3MzFhIi8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPGZpbHRlciBpZD0ic2hhZG93IiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjEyIiBzdGREZXZpYXRpb249IjE4IiBmbG9vZC1jb2xvcj0icmdiYSgwLDAsMCwwLjM1KSIvPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDwhLS0gU2hhZG93IC0tPgogIDxlbGxpcHNlIGN4PSIyMDAiIGN5PSIzNjAiIHJ4PSIxNDAiIHJ5PSIyMiIgZmlsbD0icmdiYSgwLDAsMCwwLjE4KSIvPgogIDwhLS0gUGxhdGUgLS0+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxNzUiIGZpbGw9InVybCgjcGxhdGUpIiBmaWx0ZXI9InVybCgjc2hhZG93KSIvPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTcyIiBmaWxsPSJub25lIiBzdHJva2U9IiNlOGM5OWEiIHN0cm9rZS13aWR0aD0iMiIvPgogIDwhLS0gUGl6emEgYmFzZSAtLT4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxOTUiIHI9IjE0OCIgZmlsbD0iI2U4YTAzMCIvPgogIDwhLS0gQ3J1c3QgLS0+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTk1IiByPSIxNDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5NzgyMCIgc3Ryb2tlLXdpZHRoPSIxOCIvPgogIDwhLS0gU2F1Y2UgLS0+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTk1IiByPSIxMjYiIGZpbGw9IiNkNjNiMWYiLz4KICA8IS0tIENoZWVzZSAtLT4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxOTUiIHI9IjEyMiIgZmlsbD0iI2Y1ZDc2ZSIgb3BhY2l0eT0iMC44NSIvPgogIDwhLS0gQ2hlZXNlIGJsb2JzIC0tPgogIDxlbGxpcHNlIGN4PSIxODUiIGN5PSIxNzUiIHJ4PSIyOCIgcnk9IjIyIiBmaWxsPSIjZjBjYzU1IiBvcGFjaXR5PSIwLjciLz4KICA8ZWxsaXBzZSBjeD0iMjI1IiBjeT0iMjA1IiByeD0iMjQiIHJ5PSIyMCIgZmlsbD0iI2YwY2M1NSIgb3BhY2l0eT0iMC43Ii8+CiAgPGVsbGlwc2UgY3g9IjE3NSIgY3k9IjIxNSIgcng9IjIyIiByeT0iMTgiIGZpbGw9IiNmMGNjNTUiIG9wYWNpdHk9IjAuNyIvPgogIDwhLS0gUGVwcGVyb25pIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjE2NSIgcj0iMTgiIGZpbGw9IiNjMDM5MmIiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNjUiIHI9IjE4IiBmaWxsPSJub25lIiBzdHJva2U9IiNhOTMyMjYiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxjaXJjbGUgY3g9IjE2NSIgY3k9IjE5NSIgcj0iMTYiIGZpbGw9IiNjMDM5MmIiLz4KICA8Y2lyY2xlIGN4PSIxNjUiIGN5PSIxOTUiIHI9IjE2IiBmaWxsPSJub25lIiBzdHJva2U9IiNhOTMyMjYiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxjaXJjbGUgY3g9IjIzNSIgY3k9IjE5MCIgcj0iMTciIGZpbGw9IiNjMDM5MmIiLz4KICA8Y2lyY2xlIGN4PSIxODUiIGN5PSIyMjUiIHI9IjE1IiBmaWxsPSIjYzAzOTJiIi8+CiAgPGNpcmNsZSBjeD0iMjIwIiBjeT0iMjI1IiByPSIxNiIgZmlsbD0iI2MwMzkyYiIvPgogIDwhLS0gQmFzaWwgLS0+CiAgPGVsbGlwc2UgY3g9IjE5NSIgY3k9IjE3OCIgcng9IjgiIHJ5PSIxMiIgZmlsbD0iIzJlN2QzMiIgdHJhbnNmb3JtPSJyb3RhdGUoLTIwLDE5NSwxNzgpIi8+CiAgPGVsbGlwc2UgY3g9IjIzOCIgY3k9IjIwOCIgcng9IjciIHJ5PSIxMSIgZmlsbD0iIzM4OGUzYyIgdHJhbnNmb3JtPSJyb3RhdGUoMzAsMjM4LDIwOCkiLz4KICA8ZWxsaXBzZSBjeD0iMTcyIiBjeT0iMjI4IiByeD0iNyIgcnk9IjEwIiBmaWxsPSIjMmU3ZDMyIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTAsMTcyLDIyOCkiLz4KICA8IS0tIFNsaWNlIGN1dCBsaW5lcyAtLT4KICA8bGluZSB4MT0iMjAwIiB5MT0iNDciIHgyPSIyMDAiIHkyPSIzNDMiIHN0cm9rZT0iI2M5NzgyMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuNCIvPgogIDxsaW5lIHgxPSI3MiIgeTE9IjEyMiIgeDI9IjMyOCIgeTI9IjI2OCIgc3Ryb2tlPSIjYzk3ODIwIiBzdHJva2Utd2lkdGg9IjEuNSIgb3BhY2l0eT0iMC40Ii8+CiAgPGxpbmUgeDE9IjcyIiB5MT0iMjY4IiB4Mj0iMzI4IiB5Mj0iMTIyIiBzdHJva2U9IiNjOTc4MjAiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjQiLz4KICA8IS0tIFNoaW5lIC0tPgogIDxlbGxpcHNlIGN4PSIxNjAiIGN5PSIxMzAiIHJ4PSIzMCIgcnk9IjE4IiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC4xMiIgdHJhbnNmb3JtPSJyb3RhdGUoLTMwLDE2MCwxMzApIi8+Cjwvc3ZnPgo=" alt="Pizza"></div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section">
+  <div class="container">
+    <div class="section-tag">🍽️ Categories</div>
+    <div class="section-title">What are you craving?</div>
+    <div class="divider-line"></div>
+    <div class="cat-grid">
+      <a href="menu.html?cat=pizza" class="cat-card">
+        <img src="/images/mainpizza.avif" alt="Pizza">
+        <div class="cat-card-name">Pizza</div>
+        <div class="cat-card-count">6 items</div>
+      </a>
+      <a href="menu.html?cat=burger" class="cat-card">
+        <img src="/images/mainburger.jpg" alt="Burger">
+        <div class="cat-card-count">6 items</div>
+      </a>
+      <a href="menu.html?cat=maincourse" class="cat-card">
+        <img src="/images/maincouse.webp" alt="Main Course">
+        <div class="cat-card-name">Main Course</div>
+        <div class="cat-card-count">6 items</div>
+      </a>
+      <a href="menu.html?cat=pasta" class="cat-card">
+        <img src="/images/mainpasta.avif" alt="Pasta">
+        <div class="cat-card-name">Pasta</div>
+        <div class="cat-card-count">4 items</div>
+      </a>
+      <a href="menu.html?cat=sushi" class="cat-card">
+        <img src="/images/mainsushi.avif" alt="Sushi">
+        <div class="cat-card-name">Sushi</div>
+        <div class="cat-card-count">4 items</div>
+      </a>
+      <a href="menu.html?cat=sweets" class="cat-card">
+        <img src="/images/mainsweet.avif" alt="Sweets">
+        <div class="cat-card-name">Sweets</div>
+        <div class="cat-card-count">6 items</div>
+      </a>
+      <a href="menu.html?cat=drinks" class="cat-card">
+        <img src="/images/maindrink.avif" alt="Drinks">
+        <div class="cat-card-count">4 items</div>
+      </a>
+      <a href="menu.html" class="cat-card">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCI+CiAgPGRlZnM+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9InBsYXRlIiBjeD0iNTAlIiBjeT0iNTAlIiByPSI1MCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZmOGYwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZTRjNCIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0icGl6emEiIGN4PSI1MCUiIGN5PSI0MCUiIHI9IjU1JSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmNGE0MzUiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZDQ3MzFhIi8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPGZpbHRlciBpZD0ic2hhZG93IiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjEyIiBzdGREZXZpYXRpb249IjE4IiBmbG9vZC1jb2xvcj0icmdiYSgwLDAsMCwwLjM1KSIvPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDwhLS0gU2hhZG93IC0tPgogIDxlbGxpcHNlIGN4PSIyMDAiIGN5PSIzNjAiIHJ4PSIxNDAiIHJ5PSIyMiIgZmlsbD0icmdiYSgwLDAsMCwwLjE4KSIvPgogIDwhLS0gUGxhdGUgLS0+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMjAwIiByPSIxNzUiIGZpbGw9InVybCgjcGxhdGUpIiBmaWx0ZXI9InVybCgjc2hhZG93KSIvPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTcyIiBmaWxsPSJub25lIiBzdHJva2U9IiNlOGM5OWEiIHN0cm9rZS13aWR0aD0iMiIvPgogIDwhLS0gUGl6emEgYmFzZSAtLT4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxOTUiIHI9IjE0OCIgZmlsbD0iI2U4YTAzMCIvPgogIDwhLS0gQ3J1c3QgLS0+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTk1IiByPSIxNDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5NzgyMCIgc3Ryb2tlLXdpZHRoPSIxOCIvPgogIDwhLS0gU2F1Y2UgLS0+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTk1IiByPSIxMjYiIGZpbGw9IiNkNjNiMWYiLz4KICA8IS0tIENoZWVzZSAtLT4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxOTUiIHI9IjEyMiIgZmlsbD0iI2Y1ZDc2ZSIgb3BhY2l0eT0iMC44NSIvPgogIDwhLS0gQ2hlZXNlIGJsb2JzIC0tPgogIDxlbGxpcHNlIGN4PSIxODUiIGN5PSIxNzUiIHJ4PSIyOCIgcnk9IjIyIiBmaWxsPSIjZjBjYzU1IiBvcGFjaXR5PSIwLjciLz4KICA8ZWxsaXBzZSBjeD0iMjI1IiBjeT0iMjA1IiByeD0iMjQiIHJ5PSIyMCIgZmlsbD0iI2YwY2M1NSIgb3BhY2l0eT0iMC43Ii8+CiAgPGVsbGlwc2UgY3g9IjE3NSIgY3k9IjIxNSIgcng9IjIyIiByeT0iMTgiIGZpbGw9IiNmMGNjNTUiIG9wYWNpdHk9IjAuNyIvPgogIDwhLS0gUGVwcGVyb25pIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjE2NSIgcj0iMTgiIGZpbGw9IiNjMDM5MmIiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNjUiIHI9IjE4IiBmaWxsPSJub25lIiBzdHJva2U9IiNhOTMyMjYiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxjaXJjbGUgY3g9IjE2NSIgY3k9IjE5NSIgcj0iMTYiIGZpbGw9IiNjMDM5MmIiLz4KICA8Y2lyY2xlIGN4PSIxNjUiIGN5PSIxOTUiIHI9IjE2IiBmaWxsPSJub25lIiBzdHJva2U9IiNhOTMyMjYiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxjaXJjbGUgY3g9IjIzNSIgY3k9IjE5MCIgcj0iMTciIGZpbGw9IiNjMDM5MmIiLz4KICA8Y2lyY2xlIGN4PSIxODUiIGN5PSIyMjUiIHI9IjE1IiBmaWxsPSIjYzAzOTJiIi8+CiAgPGNpcmNsZSBjeD0iMjIwIiBjeT0iMjI1IiByPSIxNiIgZmlsbD0iI2MwMzkyYiIvPgogIDwhLS0gQmFzaWwgLS0+CiAgPGVsbGlwc2UgY3g9IjE5NSIgY3k9IjE3OCIgcng9IjgiIHJ5PSIxMiIgZmlsbD0iIzJlN2QzMiIgdHJhbnNmb3JtPSJyb3RhdGUoLTIwLDE5NSwxNzgpIi8+CiAgPGVsbGlwc2UgY3g9IjIzOCIgY3k9IjIwOCIgcng9IjciIHJ5PSIxMSIgZmlsbD0iIzM4OGUzYyIgdHJhbnNmb3JtPSJyb3RhdGUoMzAsMjM4LDIwOCkiLz4KICA8ZWxsaXBzZSBjeD0iMTcyIiBjeT0iMjI4IiByeD0iNyIgcnk9IjEwIiBmaWxsPSIjMmU3ZDMyIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTAsMTcyLDIyOCkiLz4KICA8IS0tIFNsaWNlIGN1dCBsaW5lcyAtLT4KICA8bGluZSB4MT0iMjAwIiB5MT0iNDciIHgyPSIyMDAiIHkyPSIzNDMiIHN0cm9rZT0iI2M5NzgyMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuNCIvPgogIDxsaW5lIHgxPSI3MiIgeTE9IjEyMiIgeDI9IjMyOCIgeTI9IjI2OCIgc3Ryb2tlPSIjYzk3ODIwIiBzdHJva2Utd2lkdGg9IjEuNSIgb3BhY2l0eT0iMC40Ii8+CiAgPGxpbmUgeDE9IjcyIiB5MT0iMjY4IiB4Mj0iMzI4IiB5Mj0iMTIyIiBzdHJva2U9IiNjOTc4MjAiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjQiLz4KICA8IS0tIFNoaW5lIC0tPgogIDxlbGxpcHNlIGN4PSIxNjAiIGN5PSIxMzAiIHJ4PSIzMCIgcnk9IjE4IiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC4xMiIgdHJhbnNmb3JtPSJyb3RhdGUoLTMwLDE2MCwxMzApIi8+Cjwvc3ZnPgo=" alt="All" style="border:2px solid rgba(255,90,31,0.3)">
+        <div class="cat-card-name">All Items</div>
+        <div class="cat-card-count">36 items</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO BANNER -->
+<section style="padding:0 0 64px">
+  <div class="container">
+    <div class="promo">
+      <div class="promo-content">
+        <div class="promo-tag">🎉 Limited Offer</div>
+        <div class="promo-title">Get 30% OFF<br>Your First Order!</div>
+        <div class="promo-code">RUSH30</div>
+        <a href="menu.html" class="btn btn-white" style="font-size:.92rem">Order Now →</a>
+      </div>
+      <div class="promo-img"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgMjIwIiB3aWR0aD0iMzIwIiBoZWlnaHQ9IjIyMCI+CiAgPHJlY3Qgd2lkdGg9IjMyMCIgaGVpZ2h0PSIyMjAiIHJ4PSIxNiIgZmlsbD0iIzFhMTUxMCIvPgogIDxlbGxpcHNlIGN4PSIxNjAiIGN5PSIxOTUiIHJ4PSI5NSIgcnk9IjEyIiBmaWxsPSJyZ2JhKDAsMCwwLDAuMjUpIi8+CiAgPCEtLSBCb3R0b20gYnVuIC0tPgogIDxlbGxpcHNlIGN4PSIxNjAiIGN5PSIxNzgiIHJ4PSI4OCIgcnk9IjIwIiBmaWxsPSIjZDQ4NjBhIi8+CiAgPGVsbGlwc2UgY3g9IjE2MCIgY3k9IjE2OCIgcng9Ijg4IiByeT0iMTQiIGZpbGw9IiNlODk4MGMiLz4KICA8IS0tIExldHR1Y2UgLS0+CiAgPGVsbGlwc2UgY3g9IjE2MCIgY3k9IjE1OCIgcng9IjkyIiByeT0iMTAiIGZpbGw9IiMyN2FlNjAiLz4KICA8cGF0aCBkPSJNNjggMTU1IFE5MCAxNDggMTEwIDE1NiBRMTMwIDE0OCAxNTAgMTU2IFExNzAgMTQ4IDE5MCAxNTYgUTIxMCAxNDggMjMwIDE1NiBRMjQ4IDE0OCAyNTIgMTU1IiBmaWxsPSJub25lIiBzdHJva2U9IiMyZWNjNzEiIHN0cm9rZS13aWR0aD0iNCIvPgogIDwhLS0gVG9tYXRvIC0tPgogIDxlbGxpcHNlIGN4PSIxNjAiIGN5PSIxNDgiIHJ4PSI4MCIgcnk9IjkiIGZpbGw9IiNlNzRjM2MiLz4KICA8IS0tIENoZWVzZSAtLT4KICA8ZWxsaXBzZSBjeD0iMTYwIiBjeT0iMTM5IiByeD0iODUiIHJ5PSI5IiBmaWxsPSIjZjM5YzEyIi8+CiAgPHBhdGggZD0iTTc1IDEzNCBMODUgMTQ0IEwyNDUgMTQ0IEwyNTUgMTM0IiBmaWxsPSIjZjM5YzEyIi8+CiAgPCEtLSBQYXR0eSAtLT4KICA8ZWxsaXBzZSBjeD0iMTYwIiBjeT0iMTI5IiByeD0iODIiIHJ5PSIxNCIgZmlsbD0iIzc4NDIxMiIvPgogIDxlbGxpcHNlIGN4PSIxNjAiIGN5PSIxMjIiIHJ4PSI4MiIgcnk9IjEwIiBmaWxsPSIjNmUzYjBlIi8+CiAgPGVsbGlwc2UgY3g9IjE2MCIgY3k9IjEyMCIgcng9Ijc1IiByeT0iNyIgZmlsbD0iIzg3MzYwMCIgb3BhY2l0eT0iMC40Ii8+CiAgPCEtLSBUb3AgYnVuIC0tPgogIDxlbGxpcHNlIGN4PSIxNjAiIGN5PSIxMTIiIHJ4PSI4MiIgcnk9IjE0IiBmaWxsPSIjZTg5ODBjIi8+CiAgPHBhdGggZD0iTTc4IDExMiBRMTYwIDYwIDI0MiAxMTIiIGZpbGw9IiNkNDg2MGEiLz4KICA8cGF0aCBkPSJNNzggMTEyIFExNjAgNTggMjQyIDExMiIgZmlsbD0iI2U4OTgwYyIvPgogIDwhLS0gU2VzYW1lIHNlZWRzIC0tPgogIDxlbGxpcHNlIGN4PSIxNDUiIGN5PSI4MiIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjUiIHRyYW5zZm9ybT0icm90YXRlKC0yMCwxNDUsODIpIi8+CiAgPGVsbGlwc2UgY3g9IjE2OCIgY3k9IjcyIiByeD0iNiIgcnk9IjMiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuNSIgdHJhbnNmb3JtPSJyb3RhdGUoMTAsMTY4LDcyKSIvPgogIDxlbGxpcHNlIGN4PSIxOTAiIGN5PSI4MiIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjUiIHRyYW5zZm9ybT0icm90YXRlKDI1LDE5MCw4MikiLz4KICA8ZWxsaXBzZSBjeD0iMTU1IiBjeT0iNjgiIHJ4PSI1IiByeT0iMyIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC41Ii8+CiAgPGVsbGlwc2UgY3g9IjE3OCIgY3k9IjY1IiByeD0iNSIgcnk9IjMiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTE1LDE3OCw2NSkiLz4KPC9zdmc+" alt="Burger"></div>
+    </div>
+  </div>
+</section>
+
+<!-- POPULAR -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="section-tag">🔥 Popular</div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px;">
+      <div class="section-title">Most Ordered Today</div>
+      <a href="menu.html" style="color:var(--accent);font-size:.88rem;font-weight:600;text-decoration:none;">View All →</a>
+    </div>
+    <div class="divider-line"></div>
+    <div class="grid grid-4" id="popular-grid"></div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section" style="background:var(--card-bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:44px;">
+      <div class="section-tag" style="margin:0 auto 12px">✨ Why FlavourRush</div>
+      <div class="section-title">We're Different</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;text-align:center">
+      <div style="padding:32px 24px;background:var(--input-bg);border-radius:20px;border:1px solid var(--border)">
+        <div style="font-size:2.4rem;margin-bottom:14px">⚡</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:8px">30-Min Guarantee</div>
+        <div style="color:var(--text-muted);font-size:0.85rem;line-height:1.6">Your order delivered in 30 minutes or we give you 20% off next order</div>
+      </div>
+      <div style="padding:32px 24px;background:var(--input-bg);border-radius:20px;border:1px solid var(--border)">
+        <div style="font-size:2.4rem;margin-bottom:14px">👨‍🍳</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:8px">Chef-Crafted</div>
+        <div style="color:var(--text-muted);font-size:0.85rem;line-height:1.6">Every dish made fresh by our expert chefs using premium quality ingredients</div>
+      </div>
+      <div style="padding:32px 24px;background:var(--input-bg);border-radius:20px;border:1px solid var(--border)">
+        <div style="font-size:2.4rem;margin-bottom:14px">🌿</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:8px">Fresh Ingredients</div>
+        <div style="color:var(--text-muted);font-size:0.85rem;line-height:1.6">Farm-to-table sourcing with no preservatives or artificial flavours</div>
+      </div>
+      <div style="padding:32px 24px;background:var(--input-bg);border-radius:20px;border:1px solid var(--border)">
+        <div style="font-size:2.4rem;margin-bottom:14px">💳</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:8px">Secure Payment</div>
+        <div style="color:var(--text-muted);font-size:0.85rem;line-height:1.6">100% secure checkout with UPI, cards, wallets & COD options</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding:40px clamp(16px,4vw,60px);border-top:1px solid var(--border)">
+  <div style="max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <div class="nav-logo">🔥 FlavourRush</div>
+    <p style="color:var(--text-muted);font-size:.84rem">© 2025 FlavourRush · Made with ❤️ & 🍕</p>
+    <div style="display:flex;gap:20px">
+      <a href="menu.html" style="color:var(--text-muted);font-size:.84rem;text-decoration:none">Menu</a>
+      <a href="cart.html" style="color:var(--text-muted);font-size:.84rem;text-decoration:none">Cart</a>
+      <a href="index.html" style="color:var(--text-muted);font-size:.84rem;text-decoration:none">Login</a>
+    </div>
+  </div>
+</footer>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="search-overlay" onclick="closeOverlay(event)">
+  <div style="max-width:760px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+      <h2 style="font-family:'Playfair Display',serif;color:var(--text);font-size:1.5rem">Search Results</h2>
+      <button onclick="closeOverlayBtn()" style="background:none;border:none;color:var(--text-muted);font-size:1.6rem;cursor:pointer">✕</button>
+    </div>
+    <div class="grid grid-4" id="search-results"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+var popular=[MENU.pizza[3],MENU.burger[0],MENU.maincourse[3],MENU.sweets[0],MENU.pizza[0],MENU.maincourse[0],MENU.sweets[1],MENU.drinks[0]];
+document.getElementById('popular-grid').innerHTML=popular.map(renderCard).join('');
+
+function liveSearch(q){
+  if(!q.trim()){return;}
+  var all=Object.values(MENU).flat();
+  var res=all.filter(function(i){return i.name.toLowerCase().includes(q.toLowerCase())||i.desc.toLowerCase().includes(q.toLowerCase());});
+  document.getElementById('search-overlay').classList.add('open');
+  document.getElementById('search-results').innerHTML=res.length?res.map(renderCard).join(''):'<p style="color:var(--text-muted);grid-column:1/-1;padding:40px 0;text-align:center;font-size:1.1rem">No results for "'+q+'"</p>';
+}
+function openOverlay(){if(document.querySelector('.search-wrap input').value.trim())document.getElementById('search-overlay').classList.add('open');}
+function closeOverlay(e){if(e.target===document.getElementById('search-overlay'))closeOverlayBtn();}
+function closeOverlayBtn(){document.getElementById('search-overlay').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeOverlayBtn();});
+</script>
+</body>
+</html>

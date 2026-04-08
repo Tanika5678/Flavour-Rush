@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FlavourRush — Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.menu-hero { padding:52px clamp(16px,4vw,60px) 40px; border-bottom:1px solid var(--border); background:linear-gradient(180deg,var(--card-bg) 0%,transparent 100%); }
+.cat-tabs { display:flex;gap:8px;flex-wrap:wrap;margin-top:28px; }
+.cat-tab {
+  display:flex;align-items:center;gap:7px;padding:10px 20px;border-radius:50px;
+  border:1.5px solid var(--border);background:var(--card-bg);color:var(--text-muted);
+  font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;transition:all .22s;
+}
+.cat-tab img{width:24px;height:24px;border-radius:50%;object-fit:cover;}
+.cat-tab:hover{border-color:var(--accent);color:var(--accent);}
+.cat-tab.active{background:linear-gradient(135deg,#ff5a1f,#e8390e);border-color:transparent;color:#fff;box-shadow:0 4px 18px rgba(255,90,31,0.35);}
+.menu-body{padding:36px clamp(16px,4vw,60px);max-width:1300px;margin:0 auto;}
+.filter-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:32px;}
+.cat-section{margin-bottom:60px;}
+.cat-section-hd{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.cat-section-hd img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--border);}
+.cat-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--text);}
+.cat-count{margin-left:auto;font-size:.82rem;color:var(--text-muted);background:var(--input-bg);padding:4px 14px;border-radius:50px;}
+.no-results{text-align:center;padding:80px 20px;color:var(--text-muted);}
+.no-results .nr-ico{font-size:4rem;margin-bottom:16px;}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="home.html" class="nav-logo">🔥 FlavourRush</a>
+  <ul class="nav-links">
+    <li><a href="home.html">Home</a></li>
+    <li><a href="menu.html" class="active">Menu</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Search menu..." oninput="searchMenu(this.value)">
+    </div>
+    <a href="cart.html" class="cart-btn">🛒 Cart <span class="cart-count">0</span></a>
+  </div>
+</nav>
+
+<div class="menu-hero">
+  <div class="section-tag">🍽️ Full Menu</div>
+  <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;color:var(--text);margin-top:8px">Handcrafted Fresh Daily</h1>
+  <p style="color:var(--text-muted);margin-top:8px;font-size:.95rem">Choose from 7 categories · 36+ dishes · All freshly made</p>
+  <div class="cat-tabs">
+    <button class="cat-tab active" data-cat="all" onclick="filterCat('all',this)">🍽️ All Items</button>
+    <button class="cat-tab" data-cat="pizza" onclick="filterCat('pizza',this)"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMyYTIyMTgiLz4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSI5NSIgcj0iNzIiIGZpbGw9IiNkNDgyMGEiLz4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSI5NSIgcj0iNzIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2IwNjgwOCIgc3Ryb2tlLXdpZHRoPSIxMiIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9Ijk1IiByPSI1NiIgZmlsbD0iI2MwMzkyYiIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9Ijk1IiByPSI1MiIgZmlsbD0iI2YxYzQwZiIgb3BhY2l0eT0iMC42NSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9Ijc2IiByPSIxMSIgZmlsbD0iIzkyMmIyMSIvPgogIDxjaXJjbGUgY3g9IjgwIiBjeT0iOTUiIHI9IjEwIiBmaWxsPSIjOTIyYjIxIi8+CiAgPGNpcmNsZSBjeD0iMTIwIiBjeT0iOTMiIHI9IjEwIiBmaWxsPSIjOTIyYjIxIi8+CiAgPGNpcmNsZSBjeD0iOTAiIGN5PSIxMTEiIHI9IjkiIGZpbGw9IiM5MjJiMjEiLz4KICA8Y2lyY2xlIGN4PSIxMTIiIGN5PSIxMTAiIHI9IjEwIiBmaWxsPSIjOTIyYjIxIi8+CiAgPGVsbGlwc2UgY3g9IjgyIiBjeT0iNjgiIHJ4PSIxMiIgcnk9IjciIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjA4IiB0cmFuc2Zvcm09InJvdGF0ZSgtMjUsODIsNjgpIi8+Cjwvc3ZnPg==" alt="">Pizza</button>
+    <button class="cat-tab" data-cat="burger" onclick="filterCat('burger',this)"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMyMDFhMTAiLz4KICA8cGF0aCBkPSJNNTAgODIgUTEwMCAzOCAxNTAgODIiIGZpbGw9IiNjNDdhMGEiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iODIiIHJ4PSI1MiIgcnk9IjEzIiBmaWxsPSIjYzQ3YTBhIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjgwIiByeD0iNTAiIHJ5PSIxMCIgZmlsbD0iI2Q4OGMwYyIvPgogIDxlbGxpcHNlIGN4PSI4OSIgY3k9IjYwIiByeD0iNSIgcnk9IjMiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuNCIgdHJhbnNmb3JtPSJyb3RhdGUoLTIwLDg5LDYwKSIvPgogIDxlbGxpcHNlIGN4PSIxMDUiIGN5PSI1NSIgcng9IjUiIHJ5PSIzIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjQiLz4KICA8ZWxsaXBzZSBjeD0iMTIwIiBjeT0iNjAiIHJ4PSI1IiByeT0iMyIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC40IiB0cmFuc2Zvcm09InJvdGF0ZSgyMCwxMjAsNjApIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9Ijk2IiByeD0iNTUiIHJ5PSI5IiBmaWxsPSIjMjdhZTYwIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjEwNyIgcng9IjUyIiByeT0iOCIgZmlsbD0iI2U3NGMzYyIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxMTciIHJ4PSI1NCIgcnk9IjEwIiBmaWxsPSIjZjM5YzEyIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjEzMCIgcng9IjUyIiByeT0iMTMiIGZpbGw9IiM3ODQyMTIiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTI1IiByeD0iNTAiIHJ5PSIxMCIgZmlsbD0iIzZlM2IwZSIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxNDUiIHJ4PSI1MiIgcnk9IjEzIiBmaWxsPSIjZDg4YzBjIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjE1MCIgcng9IjUyIiByeT0iMTMiIGZpbGw9IiNjNDdhMGEiLz4KICA8ZWxsaXBzZSBjeD0iODIiIGN5PSIxMjAiIHJ4PSIxNCIgcnk9IjYiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjA2IiB0cmFuc2Zvcm09InJvdGF0ZSgtMjUsODIsMTIwKSIvPgo8L3N2Zz4=" alt="">Burgers</button>
+    <button class="cat-tab" data-cat="maincourse" onclick="filterCat('maincourse',this)"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMxYTEwMDgiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTE1IiByeD0iNzUiIHJ5PSIyMiIgZmlsbD0iIzZiM2ExZiIvPgogIDxwYXRoIGQ9Ik0yNSAxMTUgUTI1IDE3MCAxMDAgMTc1IFExNzUgMTcwIDE3NSAxMTUgWiIgZmlsbD0iIzVhMmUxNSIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxMTUiIHJ4PSI3NSIgcnk9IjIyIiBmaWxsPSIjZTg2MTBhIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjExMiIgcng9IjY4IiByeT0iMTgiIGZpbGw9IiNmMDcwMjAiLz4KICA8ZWxsaXBzZSBjeD0iNjgiIGN5PSIxMDYiIHJ4PSIxNiIgcnk9IjExIiBmaWxsPSIjOGI0NTEzIi8+CiAgPGVsbGlwc2UgY3g9IjY4IiBjeT0iMTAzIiByeD0iMTQiIHJ5PSI5IiBmaWxsPSIjYTA1MjJkIi8+CiAgPGVsbGlwc2UgY3g9IjEyOCIgY3k9IjEwNCIgcng9IjE1IiByeT0iMTAiIGZpbGw9IiM3YTNiMTAiLz4KICA8cGF0aCBkPSJNODUgMTA4IFExMDAgOTYgMTE1IDEwOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBvcGFjaXR5PSIwLjUiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTE1IiByeD0iNzUiIHJ5PSIyMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN2E0MDI1IiBzdHJva2Utd2lkdGg9IjMiLz4KPC9zdmc+" alt="">Main Course</button>
+    <button class="cat-tab" data-cat="pasta" onclick="filterCat('pasta',this)"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMxODEwMGEiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTI1IiByeD0iNzIiIHJ5PSIyMiIgZmlsbD0iIzVhMzgyMCIvPgogIDxwYXRoIGQ9Ik0yOCAxMjUgUTI4IDE3MiAxMDAgMTc3IFExNzIgMTcyIDE3MiAxMjUgWiIgZmlsbD0iIzRhMmMxOCIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxMjUiIHJ4PSI3MiIgcnk9IjIyIiBmaWxsPSIjZTg3NTBhIiBvcGFjaXR5PSIwLjUiLz4KICA8IS0tIFBhc3RhIHN0cmFuZHMgLS0+CiAgPHBhdGggZD0iTTY1IDEwOCBRODAgOTUgMTAwIDEwOCBRMTIwIDk1IDEzNSAxMDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y1ZGViMyIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNjAgMTE4IFE4MCAxMDUgMTAwIDExOCBRMTIwIDEwNSAxNDAgMTE4IiBmaWxsPSJub25lIiBzdHJva2U9IiNmNWRlYjMiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTY4IDEyOCBRODUgMTE1IDEwMCAxMjggUTExNSAxMTUgMTMyIDEyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjVkZWIzIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gUGFybWVzYW4gLS0+CiAgPGNpcmNsZSBjeD0iODgiIGN5PSIxMDAiIHI9IjUiIGZpbGw9IiNmZmY4ZGMiIG9wYWNpdHk9IjAuNyIvPgogIDxjaXJjbGUgY3g9IjExMiIgY3k9Ijk4IiByPSI0IiBmaWxsPSIjZmZmOGRjIiBvcGFjaXR5PSIwLjciLz4KICA8IS0tIEJhc2lsIC0tPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSI5NSIgcng9IjciIHJ5PSIxMCIgZmlsbD0iIzI3YWU2MCIgdHJhbnNmb3JtPSJyb3RhdGUoLTE1LDEwMCw5NSkiLz4KPC9zdmc+" alt="">Pasta</button>
+    <button class="cat-tab" data-cat="sushi" onclick="filterCat('sushi',this)"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMwYTEyMTgiLz4KICA8IS0tIFN1c2hpIHJvbGwgLS0+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjEwNSIgcng9IjU1IiByeT0iNTUiIGZpbGw9IiMxYTFhMWEiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTA1IiByeD0iNTIiIHJ5PSI1MiIgZmlsbD0iIzJkMmQyZCIvPgogIDwhLS0gUmljZSBsYXllciAtLT4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTA1IiByeD0iNDQiIHJ5PSI0NCIgZmlsbD0iI2Y1ZjVmMCIvPgogIDwhLS0gRmlsbGluZyAtLT4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDUiIHI9IjIyIiBmaWxsPSIjZTg3NTBhIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjEwMiIgcng9IjE2IiByeT0iMTQiIGZpbGw9IiNmZjZiMzUiLz4KICA8IS0tIFNlc2FtZSAtLT4KICA8Y2lyY2xlIGN4PSI3OCIgY3k9IjgyIiByPSIyIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC41Ii8+CiAgPGNpcmNsZSBjeD0iMTIyIiBjeT0iODUiIHI9IjIiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjUiLz4KICA8Y2lyY2xlIGN4PSI3MiIgY3k9IjEwOCIgcj0iMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNSIvPgogIDwhLS0gTmlnaXJpIGJlc2lkZSAtLT4KICA8ZWxsaXBzZSBjeD0iMTU4IiBjeT0iMTA1IiByeD0iMTYiIHJ5PSIyMiIgZmlsbD0iI2Y1ZjVmMCIgdHJhbnNmb3JtPSJyb3RhdGUoMTAsMTU4LDEwNSkiLz4KICA8ZWxsaXBzZSBjeD0iMTU4IiBjeT0iOTciIHJ4PSIxMyIgcnk9IjEyIiBmaWxsPSIjZTg3NTBhIiB0cmFuc2Zvcm09InJvdGF0ZSgxMCwxNTgsOTcpIi8+Cjwvc3ZnPg==" alt="">Sushi</button>
+    <button class="cat-tab" data-cat="sweets" onclick="filterCat('sweets',this)"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMxYTA4MDgiLz4KICA8IS0tIENha2Ugc2xpY2UgLS0+CiAgPHBhdGggZD0iTTYwIDE1NSBMMTAwIDE1NSBMMTAwIDgwIFoiIGZpbGw9IiM2YjJhMGEiLz4KICA8cGF0aCBkPSJNNjAgMTU1IEwxMDAgODAgTDE0MCAxNTUgWiIgZmlsbD0iIzVhMjIwOCIvPgogIDxwYXRoIGQ9Ik02MiAxNDggTDEwMCAxNDggTDEwMCA4MiBaIiBmaWxsPSIjYzg2OTFhIi8+CiAgPHBhdGggZD0iTTYyIDE0OCBMMTAwIDgyIEwxMzggMTQ4IFoiIGZpbGw9IiNiODVhMTUiLz4KICA8cGF0aCBkPSJNNjIgMTE4IEwxMDAgMTE4IEwxMDAgODIgWiIgZmlsbD0iI2YzOWMxMiIgb3BhY2l0eT0iMC44NSIvPgogIDxwYXRoIGQ9Ik02MiAxMTggTDEwMCA4MiBMMTM4IDExOCBaIiBmaWxsPSIjZTg4NTBhIiBvcGFjaXR5PSIwLjg1Ii8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjgwIiByeD0iMTIiIHJ5PSI3IiBmaWxsPSJ3aGl0ZSIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSI3OCIgcng9IjgiIHJ5PSI1IiBmaWxsPSJ3aGl0ZSIvPgogIDxwYXRoIGQ9Ik05NSA3NCBRMTAwIDY2IDEwNSA3NCIgZmlsbD0iI2U5MWU2MyIvPgo8L3N2Zz4=" alt="">Sweets</button>
+    <button class="cat-tab" data-cat="drinks" onclick="filterCat('drinks',this)"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMwODEwMTgiLz4KICA8cGF0aCBkPSJNODIgNTUgTDc0IDE2NSBMMTI2IDE2NSBMMTE4IDU1IFoiIGZpbGw9InJnYmEoMjU1LDE2NSwwLDAuMTUpIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4yKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8cGF0aCBkPSJNODMgNjUgTDc1IDE2MCBMMTI1IDE2MCBMMTE3IDY1IFoiIGZpbGw9IiNmMzljMTIiIG9wYWNpdHk9IjAuNyIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSI2NyIgcng9IjE4IiByeT0iNSIgZmlsbD0iI2ZmZjlmMCIgb3BhY2l0eT0iMC45Ii8+CiAgPGVsbGlwc2UgY3g9Ijk1IiBjeT0iNjUiIHJ4PSI3IiByeT0iMyIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNiIvPgogIDxyZWN0IHg9IjExMiIgeT0iNDQiIHdpZHRoPSI0IiBoZWlnaHQ9IjExNiIgcng9IjIiIGZpbGw9IiNlODc1MGEiLz4KICA8cmVjdCB4PSI3MiIgeT0iNTIiIHdpZHRoPSI1NiIgaGVpZ2h0PSI3IiByeD0iMyIgZmlsbD0iI2Q0ODYwYSIvPgogIDxwYXRoIGQ9Ik04OCA4NSBMODQgMTQ1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC4xMiIvPgo8L3N2Zz4=" alt="">Drinks</button>
+  </div>
+</div>
+
+<div class="menu-body">
+  <div class="filter-bar">
+    <div class="chips" id="filter-chips">
+      <button class="chip active" onclick="setFilter('all',this)">All</button>
+      <button class="chip" onclick="setFilter('veg',this)">🟢 Veg</button>
+      <button class="chip" onclick="setFilter('best',this)">⭐ Best Seller</button>
+      <button class="chip" onclick="setFilter('new',this)">🆕 New</button>
+      <button class="chip" onclick="setFilter('hot',this)">🔥 Hot</button>
+    </div>
+    <select class="sort-select" onchange="setSort(this.value)">
+      <option value="">Sort: Default</option>
+      <option value="price-asc">Price: Low → High</option>
+      <option value="price-desc">Price: High → Low</option>
+      <option value="rating">⭐ Top Rated</option>
+    </select>
+  </div>
+  <div id="menu-content"></div>
+</div>
+
+<footer style="padding:32px clamp(16px,4vw,60px);border-top:1px solid var(--border)">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
+    <div class="nav-logo">🔥 FlavourRush</div>
+    <p style="color:var(--text-muted);font-size:.84rem">© 2025 FlavourRush</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+var CAT={
+  pizza:{label:'Pizza',img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMyYTIyMTgiLz4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSI5NSIgcj0iNzIiIGZpbGw9IiNkNDgyMGEiLz4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSI5NSIgcj0iNzIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2IwNjgwOCIgc3Ryb2tlLXdpZHRoPSIxMiIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9Ijk1IiByPSI1NiIgZmlsbD0iI2MwMzkyYiIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9Ijk1IiByPSI1MiIgZmlsbD0iI2YxYzQwZiIgb3BhY2l0eT0iMC42NSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9Ijc2IiByPSIxMSIgZmlsbD0iIzkyMmIyMSIvPgogIDxjaXJjbGUgY3g9IjgwIiBjeT0iOTUiIHI9IjEwIiBmaWxsPSIjOTIyYjIxIi8+CiAgPGNpcmNsZSBjeD0iMTIwIiBjeT0iOTMiIHI9IjEwIiBmaWxsPSIjOTIyYjIxIi8+CiAgPGNpcmNsZSBjeD0iOTAiIGN5PSIxMTEiIHI9IjkiIGZpbGw9IiM5MjJiMjEiLz4KICA8Y2lyY2xlIGN4PSIxMTIiIGN5PSIxMTAiIHI9IjEwIiBmaWxsPSIjOTIyYjIxIi8+CiAgPGVsbGlwc2UgY3g9IjgyIiBjeT0iNjgiIHJ4PSIxMiIgcnk9IjciIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjA4IiB0cmFuc2Zvcm09InJvdGF0ZSgtMjUsODIsNjgpIi8+Cjwvc3ZnPg=='},
+  burger:{label:'Burgers',img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMyMDFhMTAiLz4KICA8cGF0aCBkPSJNNTAgODIgUTEwMCAzOCAxNTAgODIiIGZpbGw9IiNjNDdhMGEiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iODIiIHJ4PSI1MiIgcnk9IjEzIiBmaWxsPSIjYzQ3YTBhIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjgwIiByeD0iNTAiIHJ5PSIxMCIgZmlsbD0iI2Q4OGMwYyIvPgogIDxlbGxpcHNlIGN4PSI4OSIgY3k9IjYwIiByeD0iNSIgcnk9IjMiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuNCIgdHJhbnNmb3JtPSJyb3RhdGUoLTIwLDg5LDYwKSIvPgogIDxlbGxpcHNlIGN4PSIxMDUiIGN5PSI1NSIgcng9IjUiIHJ5PSIzIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjQiLz4KICA8ZWxsaXBzZSBjeD0iMTIwIiBjeT0iNjAiIHJ4PSI1IiByeT0iMyIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC40IiB0cmFuc2Zvcm09InJvdGF0ZSgyMCwxMjAsNjApIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9Ijk2IiByeD0iNTUiIHJ5PSI5IiBmaWxsPSIjMjdhZTYwIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjEwNyIgcng9IjUyIiByeT0iOCIgZmlsbD0iI2U3NGMzYyIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxMTciIHJ4PSI1NCIgcnk9IjEwIiBmaWxsPSIjZjM5YzEyIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjEzMCIgcng9IjUyIiByeT0iMTMiIGZpbGw9IiM3ODQyMTIiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTI1IiByeD0iNTAiIHJ5PSIxMCIgZmlsbD0iIzZlM2IwZSIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxNDUiIHJ4PSI1MiIgcnk9IjEzIiBmaWxsPSIjZDg4YzBjIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjE1MCIgcng9IjUyIiByeT0iMTMiIGZpbGw9IiNjNDdhMGEiLz4KICA8ZWxsaXBzZSBjeD0iODIiIGN5PSIxMjAiIHJ4PSIxNCIgcnk9IjYiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjA2IiB0cmFuc2Zvcm09InJvdGF0ZSgtMjUsODIsMTIwKSIvPgo8L3N2Zz4='},
+  maincourse:{label:'Main Course',img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMxYTEwMDgiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTE1IiByeD0iNzUiIHJ5PSIyMiIgZmlsbD0iIzZiM2ExZiIvPgogIDxwYXRoIGQ9Ik0yNSAxMTUgUTI1IDE3MCAxMDAgMTc1IFExNzUgMTcwIDE3NSAxMTUgWiIgZmlsbD0iIzVhMmUxNSIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxMTUiIHJ4PSI3NSIgcnk9IjIyIiBmaWxsPSIjZTg2MTBhIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjExMiIgcng9IjY4IiByeT0iMTgiIGZpbGw9IiNmMDcwMjAiLz4KICA8ZWxsaXBzZSBjeD0iNjgiIGN5PSIxMDYiIHJ4PSIxNiIgcnk9IjExIiBmaWxsPSIjOGI0NTEzIi8+CiAgPGVsbGlwc2UgY3g9IjY4IiBjeT0iMTAzIiByeD0iMTQiIHJ5PSI5IiBmaWxsPSIjYTA1MjJkIi8+CiAgPGVsbGlwc2UgY3g9IjEyOCIgY3k9IjEwNCIgcng9IjE1IiByeT0iMTAiIGZpbGw9IiM3YTNiMTAiLz4KICA8cGF0aCBkPSJNODUgMTA4IFExMDAgOTYgMTE1IDEwOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBvcGFjaXR5PSIwLjUiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTE1IiByeD0iNzUiIHJ5PSIyMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN2E0MDI1IiBzdHJva2Utd2lkdGg9IjMiLz4KPC9zdmc+'},
+  pasta:{label:'Pasta',img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMxODEwMGEiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTI1IiByeD0iNzIiIHJ5PSIyMiIgZmlsbD0iIzVhMzgyMCIvPgogIDxwYXRoIGQ9Ik0yOCAxMjUgUTI4IDE3MiAxMDAgMTc3IFExNzIgMTcyIDE3MiAxMjUgWiIgZmlsbD0iIzRhMmMxOCIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxMjUiIHJ4PSI3MiIgcnk9IjIyIiBmaWxsPSIjZTg3NTBhIiBvcGFjaXR5PSIwLjUiLz4KICA8IS0tIFBhc3RhIHN0cmFuZHMgLS0+CiAgPHBhdGggZD0iTTY1IDEwOCBRODAgOTUgMTAwIDEwOCBRMTIwIDk1IDEzNSAxMDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y1ZGViMyIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNjAgMTE4IFE4MCAxMDUgMTAwIDExOCBRMTIwIDEwNSAxNDAgMTE4IiBmaWxsPSJub25lIiBzdHJva2U9IiNmNWRlYjMiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTY4IDEyOCBRODUgMTE1IDEwMCAxMjggUTExNSAxMTUgMTMyIDEyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjVkZWIzIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gUGFybWVzYW4gLS0+CiAgPGNpcmNsZSBjeD0iODgiIGN5PSIxMDAiIHI9IjUiIGZpbGw9IiNmZmY4ZGMiIG9wYWNpdHk9IjAuNyIvPgogIDxjaXJjbGUgY3g9IjExMiIgY3k9Ijk4IiByPSI0IiBmaWxsPSIjZmZmOGRjIiBvcGFjaXR5PSIwLjciLz4KICA8IS0tIEJhc2lsIC0tPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSI5NSIgcng9IjciIHJ5PSIxMCIgZmlsbD0iIzI3YWU2MCIgdHJhbnNmb3JtPSJyb3RhdGUoLTE1LDEwMCw5NSkiLz4KPC9zdmc+'},
+  sushi:{label:'Sushi',img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMwYTEyMTgiLz4KICA8IS0tIFN1c2hpIHJvbGwgLS0+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjEwNSIgcng9IjU1IiByeT0iNTUiIGZpbGw9IiMxYTFhMWEiLz4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTA1IiByeD0iNTIiIHJ5PSI1MiIgZmlsbD0iIzJkMmQyZCIvPgogIDwhLS0gUmljZSBsYXllciAtLT4KICA8ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTA1IiByeD0iNDQiIHJ5PSI0NCIgZmlsbD0iI2Y1ZjVmMCIvPgogIDwhLS0gRmlsbGluZyAtLT4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDUiIHI9IjIyIiBmaWxsPSIjZTg3NTBhIi8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjEwMiIgcng9IjE2IiByeT0iMTQiIGZpbGw9IiNmZjZiMzUiLz4KICA8IS0tIFNlc2FtZSAtLT4KICA8Y2lyY2xlIGN4PSI3OCIgY3k9IjgyIiByPSIyIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC41Ii8+CiAgPGNpcmNsZSBjeD0iMTIyIiBjeT0iODUiIHI9IjIiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjUiLz4KICA8Y2lyY2xlIGN4PSI3MiIgY3k9IjEwOCIgcj0iMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNSIvPgogIDwhLS0gTmlnaXJpIGJlc2lkZSAtLT4KICA8ZWxsaXBzZSBjeD0iMTU4IiBjeT0iMTA1IiByeD0iMTYiIHJ5PSIyMiIgZmlsbD0iI2Y1ZjVmMCIgdHJhbnNmb3JtPSJyb3RhdGUoMTAsMTU4LDEwNSkiLz4KICA8ZWxsaXBzZSBjeD0iMTU4IiBjeT0iOTciIHJ4PSIxMyIgcnk9IjEyIiBmaWxsPSIjZTg3NTBhIiB0cmFuc2Zvcm09InJvdGF0ZSgxMCwxNTgsOTcpIi8+Cjwvc3ZnPg=='},
+  sweets:{label:'Sweets & Desserts',img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMxYTA4MDgiLz4KICA8IS0tIENha2Ugc2xpY2UgLS0+CiAgPHBhdGggZD0iTTYwIDE1NSBMMTAwIDE1NSBMMTAwIDgwIFoiIGZpbGw9IiM2YjJhMGEiLz4KICA8cGF0aCBkPSJNNjAgMTU1IEwxMDAgODAgTDE0MCAxNTUgWiIgZmlsbD0iIzVhMjIwOCIvPgogIDxwYXRoIGQ9Ik02MiAxNDggTDEwMCAxNDggTDEwMCA4MiBaIiBmaWxsPSIjYzg2OTFhIi8+CiAgPHBhdGggZD0iTTYyIDE0OCBMMTAwIDgyIEwxMzggMTQ4IFoiIGZpbGw9IiNiODVhMTUiLz4KICA8cGF0aCBkPSJNNjIgMTE4IEwxMDAgMTE4IEwxMDAgODIgWiIgZmlsbD0iI2YzOWMxMiIgb3BhY2l0eT0iMC44NSIvPgogIDxwYXRoIGQ9Ik02MiAxMTggTDEwMCA4MiBMMTM4IDExOCBaIiBmaWxsPSIjZTg4NTBhIiBvcGFjaXR5PSIwLjg1Ii8+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjgwIiByeD0iMTIiIHJ5PSI3IiBmaWxsPSJ3aGl0ZSIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSI3OCIgcng9IjgiIHJ5PSI1IiBmaWxsPSJ3aGl0ZSIvPgogIDxwYXRoIGQ9Ik05NSA3NCBRMTAwIDY2IDEwNSA3NCIgZmlsbD0iI2U5MWU2MyIvPgo8L3N2Zz4='},
+  drinks:{label:'Drinks',img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMDAiIGZpbGw9IiMwODEwMTgiLz4KICA8cGF0aCBkPSJNODIgNTUgTDc0IDE2NSBMMTI2IDE2NSBMMTE4IDU1IFoiIGZpbGw9InJnYmEoMjU1LDE2NSwwLDAuMTUpIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4yKSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8cGF0aCBkPSJNODMgNjUgTDc1IDE2MCBMMTI1IDE2MCBMMTE3IDY1IFoiIGZpbGw9IiNmMzljMTIiIG9wYWNpdHk9IjAuNyIvPgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSI2NyIgcng9IjE4IiByeT0iNSIgZmlsbD0iI2ZmZjlmMCIgb3BhY2l0eT0iMC45Ii8+CiAgPGVsbGlwc2UgY3g9Ijk1IiBjeT0iNjUiIHJ4PSI3IiByeT0iMyIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNiIvPgogIDxyZWN0IHg9IjExMiIgeT0iNDQiIHdpZHRoPSI0IiBoZWlnaHQ9IjExNiIgcng9IjIiIGZpbGw9IiNlODc1MGEiLz4KICA8cmVjdCB4PSI3MiIgeT0iNTIiIHdpZHRoPSI1NiIgaGVpZ2h0PSI3IiByeD0iMyIgZmlsbD0iI2Q0ODYwYSIvPgogIDxwYXRoIGQ9Ik04OCA4NSBMODQgMTQ1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC4xMiIvPgo8L3N2Zz4='}
+};
+var activeCat='all',activeFilter='all',activeSort='',searchQ='';
+
+function getItems(cat){return cat==='all'?Object.values(MENU).flat():(MENU[cat]||[]);}
+function applyAll(items){
+  var r=[].concat(items);
+  if(activeFilter!=='all')r=r.filter(function(i){return i.badge===activeFilter;});
+  if(searchQ)r=r.filter(function(i){return i.name.toLowerCase().includes(searchQ)||i.desc.toLowerCase().includes(searchQ);});
+  if(activeSort==='price-asc')r.sort(function(a,b){return a.price-b.price;});
+  else if(activeSort==='price-desc')r.sort(function(a,b){return b.price-a.price;});
+  else if(activeSort==='rating')r.sort(function(a,b){return b.rating-a.rating;});
+  return r;
+}
+function renderMenu(){
+  var el=document.getElementById('menu-content');
+  if(activeCat==='all'){
+    var html='';
+    Object.keys(CAT).forEach(function(cat){
+      var items=applyAll(MENU[cat]);
+      if(!items.length)return;
+      html+='<div class="cat-section"><div class="cat-section-hd"><img src="'+CAT[cat].img+'" alt=""><span class="cat-title">'+CAT[cat].label+'</span><span class="cat-count">'+items.length+' items</span></div><div class="grid grid-4">'+items.map(renderCard).join('')+'</div></div>';
+    });
+    el.innerHTML=html||'<div class="no-results"><div class="nr-ico">😕</div><p>No items match</p></div>';
+  } else {
+    var items=applyAll(getItems(activeCat));
+    if(!items.length){el.innerHTML='<div class="no-results"><div class="nr-ico">😕</div><p>No items match your filters</p></div>';return;}
+    el.innerHTML='<div class="cat-section"><div class="cat-section-hd"><img src="'+CAT[activeCat].img+'" alt=""><span class="cat-title">'+CAT[activeCat].label+'</span><span class="cat-count">'+items.length+' items</span></div><div class="grid grid-4">'+items.map(renderCard).join('')+'</div></div>';
+  }
+}
+function filterCat(cat,btn){
+  activeCat=cat;
+  document.querySelectorAll('.cat-tab').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderMenu();
+}
+function setFilter(f,btn){
+  activeFilter=f;
+  document.querySelectorAll('.chip').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderMenu();
+}
+function setSort(v){activeSort=v;renderMenu();}
+function searchMenu(q){searchQ=q.toLowerCase().trim();renderMenu();}
+
+// URL param
+var p=new URLSearchParams(location.search).get('cat');
+if(p&&MENU[p]){
+  activeCat=p;
+  document.querySelector('[data-cat="all"]').classList.remove('active');
+  var tb=document.querySelector('[data-cat="'+p+'"]');
+  if(tb)tb.classList.add('active');
+}
+renderMenu();
+</script>
+</body>
+</html>
