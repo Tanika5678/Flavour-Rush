@@ -99,14 +99,17 @@ screenshots/
 
 Then display them like this:
 
+Login Page
+![Login Page](login.png)
+
 Home Page
-![Home Page](screenshots/home-page.png)
+![Home Page](home1.png)
 
 Menu Page
-![Menu Page](screenshots/menu-page.png)
+![Menu Page](menu1.png)
 
 Cart Page
-![Cart Page](screenshots/cart-page.png)
+![Cart Page](cart.png)
 
 ---
 
