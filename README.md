@@ -9,10 +9,15 @@ This project focuses on building a clean and organized structure while ensuring 
 
 ✨ Key Features
 Interactive and visually appealing user interface
+
 Multiple food categories including burgers, pizza, pasta, sushi, drinks, and desserts
+
 Menu page displaying food items with images and details
+
 Add-to-cart functionality for selected items
+
 Organized navigation between different pages
+
 Clean and responsive layout for better user experience
 
 🛠️ Technologies Used
